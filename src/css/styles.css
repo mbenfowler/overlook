@@ -1,3 +1,147 @@
 body {
-  background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: 'Play', sans-serif;
+}
+
+section {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+div {
+  display: flex;
+  align-items: center;
+}
+
+#nav {
+  justify-content: space-between;
+  background-color: #A8F6B5;
+}
+
+#nav div {
+  margin-right: 2em;
+  width: 225px;
+  justify-content: space-between;
+}
+
+#home {
+  margin: 20px;
+  font-family: 'Cinzel Decorative', cursive;
+  font-size: xx-large;
+}
+
+#costAndToggle {
+  flex-direction: column;
+  background-color: #D9D9D9;
+}
+
+#bookingsToggle {
+  display: flex;
+  flex-direction: row;
+}
+
+#bookNowBtn {
+  width: 150px;
+  height: 50px;
+  background-color: blue;
+  color: white;
+  font-size: larger;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.5s;
+}
+
+#bookNowBtn:hover {
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+#bookNowBtn span {
+  cursor: pointer;
+  position: relative;
+  transition: 0.5s;
+}
+
+#bookNowBtn span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+#bookNowBtn:hover span {
+  padding-right: 20px;
+}
+
+#bookNowBtn:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+#userSettings {
+  height: 2em;
+  width: 2em;
+  padding: .5em;
+  border-radius: 50%;
+  background-color: #D9D9D9;
+}
+
+#totalAmountSpentTitle {
+  font-size: larger;
+}
+
+#totalAmountSpentDollars {
+  font-size: xx-large;
+  margin-top: 0;
+}
+
+#bookingsToggleTitle {
+  font-size: xx-large;
+  margin: 0 0 5px;
+}
+
+#bookingsToggle {
+  font-size: 17px;
+  color: white;
+  background-color: rgba(52, 51, 51, 0.723);
+  display: flex;
+  width: 30vw;
+  height: 60px;
+  justify-content: space-evenly;
+  align-items: center;
+  border-radius: 25px;
+  margin-bottom: 5px;
+  min-width: 230px;
+}
+
+.toggle-option {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 45%;
+  height: 40px;
+  border-radius: 25px;
+  border: solid 2px #00000000;
+}
+
+.selected-view {
+  background-color: #242528;
+}
+
+.unselected-view {
+  transition: 0.2s;
+}
+
+.unselected-view:hover {
+  border: solid 2px #242528;
+  cursor: pointer;
 }

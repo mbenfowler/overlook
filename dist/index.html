@@ -3,14 +3,35 @@
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Webpack Starter Kit</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative&family=Lexend&family=Play&family=Playfair+Display:wght@400;500&family=Roboto:ital,wght@1,100&display=swap" rel="stylesheet">
+  <title>Book your next stay today!</title>
 </head>
 <body>
-  <img src="./images/turing-logo.png" alt="turing logo">
-  
+  <section id="nav">
+    <p id="home">Overlook</p>
+    <div>
+      <button id="bookNowBtn"><span>Book Now! </span></button>
+      <img id="userSettings" src="./images/user.png" alt="User settings" />
+    </div>
+  </section>
+  <section class="hidden" id="newBooking">
+    <div id="datePicker"></div>
+    <div id="roomTypeFilter"></div>
+    <section id="roomsAvailable"></section>
+  </section>
+  <section id="costAndToggle">
+    <p id="totalAmountSpentTitle">Total Amount Spent on Rooms</p>
+    <p id="totalAmountSpentDollars">$0</p>
+    <p id="bookingsToggleTitle">Bookings</p>
+    <div id="bookingsToggle">
+      <p class="toggle-option selected-view">Upcoming</p>
+      <p class="toggle-option unselected-view">Previous</p>
+    </div>
+  </section>
+  <section id="bookings"></section>
   <!-- Do not include the scripts.js or class files here - it is done by the webpack server -->
   <script src="bundle.js"></script>
-
 </body>
 </html>
