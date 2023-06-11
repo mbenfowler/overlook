@@ -145,3 +145,21 @@ div {
   border: solid 2px #242528;
   cursor: pointer;
 }
+
+#bookings {
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-around;
+}
+
+#bookings div {
+  width: 100%;
+}
+
+#bookings div span {
+  margin-right: 30px;
+  min-width: 120px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+}
