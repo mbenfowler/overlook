@@ -1,13 +1,14 @@
-import { bookings, root, leadingZero } from "./scripts";
+import { bookings, root, leadingZero, upcomingBookings, previousBookings } from "./scripts";
+import { toggleBtns } from "./helperFunctions";
 import { getTotalSpent } from "./user";
-import { getUpcomingBookings } from "./bookings";
+import { getBookingsByView } from "./bookings";
+import { pageData } from "./apiCalls";
 
-let currentView;
+let currentView = 'upcoming';
 
-const pageLoadRenders = (pageData) => {
-    currentView = 'upcoming';
-    const upcomingBookings = getUpcomingBookings(pageData.currentUserBookings);
-    const totalDollarsSpent = getTotalSpent(upcomingBookings, pageData.allRooms);
+const renderDashboard = (pageData) => {
+    const bookingsByView = getBookingsByView(pageData.currentUserBookings, currentView);
+    const totalDollarsSpent = getTotalSpent(bookingsByView, pageData.allRooms);
 
     const cents = Math.trunc((totalDollarsSpent % 1).toFixed(2) * 100);
     if (cents.toString().length > 1) {
@@ -18,7 +19,8 @@ const pageLoadRenders = (pageData) => {
     root.style.setProperty('--cents', cents)
 
     let rowColor;
-    upcomingBookings.forEach((booking, i) => {
+    bookings.innerHTML = '';
+    bookingsByView.forEach((booking, i) => {
         const thisRoom = pageData.allRooms.find(room => room.number === booking.roomNumber);
         i % 2 === 0 ? rowColor = '#bbf3c5' : rowColor = 'white';
         bookings.innerHTML += `
@@ -33,4 +35,12 @@ const pageLoadRenders = (pageData) => {
     });
 }
 
-export { pageLoadRenders };
+const toggleView = (clickedViewID) => {
+    if (clickedViewID !== currentView) {
+        toggleBtns([upcomingBookings, previousBookings]);
+        currentView = clickedViewID;
+        renderDashboard(pageData);
+    }
+}
+
+export { renderDashboard, toggleView };

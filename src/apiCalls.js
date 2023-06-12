@@ -1,5 +1,5 @@
 import { getRandomUser } from './user';
-import { pageLoadRenders } from './domUpdates';
+import { renderDashboard } from './domUpdates';
 
 let currentUser;
 let pageData = {
@@ -16,7 +16,7 @@ const handleUserData = users => currentUser = getRandomUser(users);
 const handleBookingsData = bookings => {
   setTimeout(() => {
     pageData.currentUserBookings = bookings.filter(booking => booking.userID === currentUser.id);
-    pageLoadRenders(pageData);
+    renderDashboard(pageData);
   }, 10);
 }
 
@@ -43,4 +43,4 @@ const loadData = () => {
   })   
 }
 
-export { loadData };
+export { loadData, pageData };
