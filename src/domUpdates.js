@@ -6,10 +6,7 @@ let currentView;
 
 const pageLoadRenders = (pageData) => {
     currentView = 'upcoming';
-    // function that gets only upcoming stays
     const upcomingBookings = getUpcomingBookings(pageData.currentUserBookings);
-    // function that sorts by date with soonest at the top of the list
-
     const totalDollarsSpent = getTotalSpent(upcomingBookings, pageData.allRooms);
 
     const cents = Math.trunc((totalDollarsSpent % 1).toFixed(2) * 100);
