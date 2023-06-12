@@ -1,14 +1,16 @@
 import { bookings, root, leadingZero } from "./scripts";
 import { getTotalSpent } from "./user";
+import { getUpcomingBookings } from "./bookings";
 
 let currentView;
 
 const pageLoadRenders = (pageData) => {
     currentView = 'upcoming';
     // function that gets only upcoming stays
+    const upcomingBookings = getUpcomingBookings(pageData.currentUserBookings);
     // function that sorts by date with soonest at the top of the list
 
-    const totalDollarsSpent = getTotalSpent(pageData);
+    const totalDollarsSpent = getTotalSpent(upcomingBookings, pageData.allRooms);
 
     const cents = Math.trunc((totalDollarsSpent % 1).toFixed(2) * 100);
     if (cents.toString().length > 1) {
@@ -19,7 +21,7 @@ const pageLoadRenders = (pageData) => {
     root.style.setProperty('--cents', cents)
 
     let rowColor;
-    pageData.currentUserBookings.forEach((booking, i) => {
+    upcomingBookings.forEach((booking, i) => {
         const thisRoom = pageData.allRooms.find(room => room.number === booking.roomNumber);
         i % 2 === 0 ? rowColor = '#bbf3c5' : rowColor = 'white';
         bookings.innerHTML += `
