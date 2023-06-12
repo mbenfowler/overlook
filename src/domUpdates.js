@@ -16,7 +16,7 @@ const renderDashboard = (pageData) => {
     }
 
     root.style.setProperty('--costInDollars', totalDollarsSpent.toFixed(0));
-    root.style.setProperty('--cents', cents)
+    root.style.setProperty('--cents', cents);
 
     let rowColor;
     bookings.innerHTML = `

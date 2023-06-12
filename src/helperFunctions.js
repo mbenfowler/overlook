@@ -4,8 +4,8 @@ const getRandomIndex = (array) => {
 
 const toggleBtns = elements => {
     elements.forEach(element => {
-      element.classList.toggle('selected-view')
-      element.classList.toggle('unselected-view')
+      element.classList.toggle('selected-view');
+      element.classList.toggle('unselected-view');
     })
 }
 

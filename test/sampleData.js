@@ -70,6 +70,6 @@ const sampleData = {
             "costPerNight": 429.44
         }
     ]
-}
+};
 
 export { sampleData };

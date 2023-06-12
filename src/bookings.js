@@ -17,6 +17,7 @@ const getBookingsByView = (bookings, view) => {
     } else if (view === 'previous') {
         filteredBookings = bookings.filter(booking => Date.parse(today) > Date.parse(booking.date));
     }
+    
     return sortBookings(filteredBookings, view);
 }
 
