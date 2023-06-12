@@ -19,7 +19,16 @@ const renderDashboard = (pageData) => {
     root.style.setProperty('--cents', cents)
 
     let rowColor;
-    bookings.innerHTML = '';
+    bookings.innerHTML = `
+        <div style="background-color:gray">
+            <span>Date</span>
+            <span>Room No.</span>
+            <span>Room Type</span>
+            <span>Bed Size</span>
+            <span>No. Beds</span>
+            <span>$</span>
+        </div>
+    `;
     bookingsByView.forEach((booking, i) => {
         const thisRoom = pageData.allRooms.find(room => room.number === booking.roomNumber);
         i % 2 === 0 ? rowColor = '#bbf3c5' : rowColor = 'white';
