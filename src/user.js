@@ -4,4 +4,10 @@ const getRandomUser = users => {
     return users[getRandomIndex(users)]
 }
 
-export { getRandomUser };
+const getTotalSpent = rooms => {
+    return rooms.reduce((acc, room) => {
+        return acc += room.costPerNight
+    }, 0);
+}
+
+export { getRandomUser, getTotalSpent };

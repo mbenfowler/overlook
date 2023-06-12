@@ -23,7 +23,14 @@
   </section>
   <section id="costAndToggle">
     <p id="totalAmountSpentTitle">Total Amount Spent on Rooms</p>
-    <p id="totalAmountSpentDollars">$0</p>
+    <div>
+      <span>$</span>
+      <span id="totalAmountSpentDollars"></span>
+      <span>.</span>
+      <span id="leadingZero">0</span>
+      <span id="cents"></span>
+    </div>
+    
     <p id="bookingsToggleTitle">Bookings</p>
     <div id="bookingsToggle">
       <p class="toggle-option selected-view">Upcoming</p>

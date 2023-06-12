@@ -1,12 +1,23 @@
-import { bookings } from "./scripts";
+import { bookings, root, leadingZero } from "./scripts";
+import { getTotalSpent } from "./user";
 
 let currentView;
 
 const pageLoadRenders = (pageData) => {
     currentView = 'upcoming';
-    let rowColor;
     // function that gets only upcoming stays
     // function that sorts by date with soonest at the top of the list
+
+    const totalDollarsSpent = getTotalSpent(pageData.currentUserRooms)
+    const cents = (totalDollarsSpent % 1).toFixed(2) * 100;
+    console.log(cents.toString().length)
+    if (cents.toString().length > 1) {
+        leadingZero.classList.add('hidden');
+    }
+    root.style.setProperty('--costInDollars', totalDollarsSpent.toFixed(0));
+    root.style.setProperty('--cents', cents)
+
+    let rowColor;
     pageData.currentUserBookings.forEach((booking, i) => {
         const thisRoom = pageData.currentUserRooms.find(room => room.number === booking.roomNumber);
         i % 2 === 0 ? rowColor = '#bbf3c5' : rowColor = 'white';

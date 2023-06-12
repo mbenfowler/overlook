@@ -9,9 +9,11 @@ import './images/user.png';
 
 // query selectors
 const bookings = document.querySelector('#bookings');
+const root = document.querySelector(':root');
+const leadingZero = document.querySelector('#leadingZero');
 
 // event listeners
 window.addEventListener('load', loadData);
 
 
-export { bookings };
+export { bookings, root, leadingZero };
