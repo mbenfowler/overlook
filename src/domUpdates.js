@@ -29,19 +29,24 @@ const renderDashboard = (pageData) => {
             <span>$</span>
         </div>
     `;
-    bookingsByView.forEach((booking, i) => {
-        const thisRoom = pageData.allRooms.find(room => room.number === booking.roomNumber);
-        i % 2 === 0 ? rowColor = '#bbf3c5' : rowColor = 'white';
-        bookings.innerHTML += `
-        <div style=background-color:${rowColor};">
-            <span>${booking.date}</span>
-            <span>${booking.roomNumber}</span>
-            <span>${thisRoom.roomType}</span>
-            <span>${thisRoom.bedSize}</span>
-            <span>${thisRoom.numBeds}</span>
-            <span>${thisRoom.costPerNight}</span>
-        </div>`
-    });
+    
+    if(!bookingsByView.length) {
+        bookings.innerHTML += `<p id=noBookings>No ${currentView} bookings!<p>`
+    } else {
+        bookingsByView.forEach((booking, i) => {
+            const thisRoom = pageData.allRooms.find(room => room.number === booking.roomNumber);
+            i % 2 === 0 ? rowColor = '#bbf3c5' : rowColor = 'white';
+            bookings.innerHTML += `
+            <div class=row style=background-color:${rowColor};>
+                <span>${booking.date}</span>
+                <span>${booking.roomNumber}</span>
+                <span>${thisRoom.roomType}</span>
+                <span>${thisRoom.bedSize}</span>
+                <span>${thisRoom.numBeds}</span>
+                <span>${thisRoom.costPerNight}</span>
+            </div>`
+        });
+    }
 }
 
 const toggleView = (clickedViewID) => {

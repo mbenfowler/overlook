@@ -206,8 +206,28 @@ div {
   justify-content: space-around;
 }
 
+#noBookings {
+  margin: 100px;
+  align-self: center;
+}
+
 #bookings div {
   width: 100%;
+}
+
+.row {
+  animation: animate-row 0.5s ease-in-out forwards;
+}
+
+@keyframes animate-row {
+  0% {
+    opacity: 0;
+    height: 0%;
+  }
+  100% {
+    opacity: 1;
+    height: 35%;
+  }
 }
 
 #bookings div span {
