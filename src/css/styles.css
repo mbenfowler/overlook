@@ -69,7 +69,7 @@ div {
   transition: 0.5s;
 }
 
-#bookNowBtn span:after {
+#bookNowBtn span::after {
   content: '\00bb';
   position: absolute;
   opacity: 0;
@@ -82,7 +82,7 @@ div {
   padding-right: 20px;
 }
 
-#bookNowBtn:hover span:after {
+#bookNowBtn:hover span::after {
   opacity: 1;
   right: 0;
 }
@@ -96,12 +96,66 @@ div {
 }
 
 #totalAmountSpentTitle {
+  margin-bottom: 0;
+}
+
+#costAndToggle div {
+  margin-bottom: 20px;
+}
+
+#costAndToggle div span {
+  font-size: xx-large;
+}
+
+#totalAmountSpentTitle {
   font-size: larger;
 }
 
+:root {
+  --costInDollars: 0;
+  --cents: 0;
+}
+
+@property --num {
+  syntax: "<integer>";
+  initial-value: 0;
+  inherits: false;
+}
+
 #totalAmountSpentDollars {
-  font-size: xx-large;
-  margin-top: 0;
+  counter-reset: dollars var(--num);
+  animation: dollarCounter 5s forwards ease-in-out;
+}
+
+#totalAmountSpentDollars::after {
+  content: counter(dollars);
+}
+
+@keyframes dollarCounter {
+  from {
+    --num: 0;
+  }
+  to {
+    --num: var(--costInDollars);
+  }
+}
+
+#cents {
+  counter-reset: cents var(--num);
+  animation: centsCounter 5s forwards ease-in-out;
+}
+
+#cents::after {
+  content: counter(cents);
+}
+
+@keyframes centsCounter {
+  from {
+    --num: 0;
+  }
+  to {
+    --num: var(--cents);
+  }
 }
 
 #bookingsToggleTitle {
@@ -144,4 +198,26 @@ div {
 .unselected-view:hover {
   border: solid 2px #242528;
   cursor: pointer;
+}
+
+#bookings {
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-around;
+}
+
+#bookings div {
+  width: 100%;
+}
+
+#bookings div span {
+  margin-right: 30px;
+  min-width: 120px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+}
+
+.hidden {
+  display: none;
 }
