@@ -16,6 +16,7 @@ const bookingsToggle = document.querySelector('#bookingsToggle');
 const upcomingBookings = document.querySelector("#upcoming");
 const previousBookings = document.querySelector("#previous");
 const bookNowBtn = document.querySelector("#bookNowBtn");
+const newBooking = document.querySelector("#newBooking");
 
 // event listeners
 window.addEventListener('load', loadData);
@@ -41,4 +42,4 @@ bookNowBtn.addEventListener('keyup', (e) => {
 });
 
 
-export { bookings, root, leadingZero, upcomingBookings, previousBookings };
+export { bookings, root, leadingZero, upcomingBookings, previousBookings, newBooking };

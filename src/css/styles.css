@@ -238,6 +238,47 @@ div {
   align-items: center;
 }
 
+/* book room flow */
+
+#newBooking {
+  position: fixed;
+  justify-content: center;
+  align-items: center;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 85%;
+  max-height: 95%;
+  border-radius: 50px;
+  z-index: 1;
+  background-image: linear-gradient(to right, #535a72cc, #171d2fcc);
+}
+
 .hidden {
   display: none;
+}
+
+.fade-in {
+  animation: fade-in 0.5s ease-in forwards, animate-recipe .5s ease-in-out forwards;
+}
+
+@keyframes fade-in {
+  0% {
+    visibility: hidden;
+    opacity: 0;
+    height: 0%;
+  }
+  30% {
+    visibility: hidden;
+    opacity: 0;
+  }
+  60% {
+    visibility: visible;
+    opacity: 1;
+  }
+  100% {
+    visibility: visible;
+    opacity: 1;
+    height: 98%;
+  }
 }

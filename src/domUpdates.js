@@ -1,4 +1,4 @@
-import { bookings, root, leadingZero, upcomingBookings, previousBookings } from "./scripts";
+import { bookings, root, leadingZero, upcomingBookings, previousBookings, newBooking } from "./scripts";
 import { toggleBtns } from "./helperFunctions";
 import { getTotalSpent } from "./user";
 import { getBookingsByView } from "./bookings";
@@ -58,7 +58,8 @@ const toggleView = (clickedViewID) => {
 }
 
 const bookNow = () => {
-    console.log("booking!");
+    newBooking.classList.remove('hidden');
+    newBooking.classList.add("fade-in");
 }
 
 export { renderDashboard, toggleView, bookNow };
