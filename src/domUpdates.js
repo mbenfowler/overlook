@@ -31,7 +31,7 @@ const renderDashboard = (pageData) => {
     `;
     
     if(!bookingsByView.length) {
-        bookings.innerHTML += `<p id=noBookings>No ${currentView} bookings!<p>`
+        bookings.innerHTML += `<p id=noBookings>No ${currentView} bookings!<p>`;
     } else {
         bookingsByView.forEach((booking, i) => {
             const thisRoom = pageData.allRooms.find(room => room.number === booking.roomNumber);
