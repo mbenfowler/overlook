@@ -8,18 +8,19 @@ const pageLoadRenders = (pageData) => {
     // function that gets only upcoming stays
     // function that sorts by date with soonest at the top of the list
 
-    const totalDollarsSpent = getTotalSpent(pageData.currentUserRooms)
-    const cents = (totalDollarsSpent % 1).toFixed(2) * 100;
-    console.log(cents.toString().length)
+    const totalDollarsSpent = getTotalSpent(pageData);
+
+    const cents = Math.trunc((totalDollarsSpent % 1).toFixed(2) * 100);
     if (cents.toString().length > 1) {
         leadingZero.classList.add('hidden');
     }
+
     root.style.setProperty('--costInDollars', totalDollarsSpent.toFixed(0));
     root.style.setProperty('--cents', cents)
 
     let rowColor;
     pageData.currentUserBookings.forEach((booking, i) => {
-        const thisRoom = pageData.currentUserRooms.find(room => room.number === booking.roomNumber);
+        const thisRoom = pageData.allRooms.find(room => room.number === booking.roomNumber);
         i % 2 === 0 ? rowColor = '#bbf3c5' : rowColor = 'white';
         bookings.innerHTML += `
         <div style=background-color:${rowColor};">
@@ -28,6 +29,7 @@ const pageLoadRenders = (pageData) => {
             <span>${thisRoom.roomType}</span>
             <span>${thisRoom.bedSize}</span>
             <span>${thisRoom.numBeds}</span>
+            <span>${thisRoom.costPerNight}</span>
         </div>`
     });
 }

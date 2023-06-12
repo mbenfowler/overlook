@@ -4,10 +4,11 @@ const getRandomUser = users => {
     return users[getRandomIndex(users)]
 }
 
-const getTotalSpent = rooms => {
-    return rooms.reduce((acc, room) => {
-        return acc += room.costPerNight
-    }, 0);
+const getTotalSpent = data => {
+    return data.currentUserBookings.reduce((acc, booking) => {
+        const thisRoom = data.allRooms.find(room => room.number === booking.roomNumber);
+        return acc += thisRoom.costPerNight;
+    }, 0)
 }
 
 export { getRandomUser, getTotalSpent };

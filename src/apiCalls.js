@@ -2,10 +2,9 @@ import { getRandomUser } from './user';
 import { pageLoadRenders } from './domUpdates';
 
 let currentUser;
-let allRooms;
 let pageData = {
   currentUserBookings: [],
-  currentUserRooms: []
+  allRooms: []
 };
 
 const getAllUsers = () => fetch('http://localhost:3001/api/v1/customers');
@@ -17,8 +16,6 @@ const handleUserData = users => currentUser = getRandomUser(users);
 const handleBookingsData = bookings => {
   setTimeout(() => {
     pageData.currentUserBookings = bookings.filter(booking => booking.userID === currentUser.id);
-    const roomNumbers = pageData.currentUserBookings.map(booking => booking.roomNumber);
-    pageData.currentUserRooms = allRooms.filter(room => roomNumbers.includes(room.number));
     pageLoadRenders(pageData);
   }, 10);
 }
@@ -31,7 +28,7 @@ const loadData = () => {
           response.json()
           .then (data => {
             const functions = {
-              rooms: (rooms) => allRooms = rooms,
+              rooms: (rooms) => pageData.allRooms = rooms,
               customers: (users) => handleUserData(users), 
               bookings: (bookings) => handleBookingsData(bookings)
             };

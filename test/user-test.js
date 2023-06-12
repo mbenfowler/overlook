@@ -2,11 +2,11 @@ import chai from 'chai';
 const expect = chai.expect;
 
 import { getTotalSpent } from "../src/user";
-import { rooms } from "./sampleData";
+import { sampleData } from "./sampleData";
 
 describe('getTotalSpent', () => {
-  const totalSpent = getTotalSpent(rooms);
+  const totalSpent = getTotalSpent(sampleData);
   it('should add the total money spent on rooms', () => {
-    expect(totalSpent).to.equal(2096.53);
+    expect(totalSpent).to.equal(2247.50);
   });
 });
