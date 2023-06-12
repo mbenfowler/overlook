@@ -57,4 +57,8 @@ const toggleView = (clickedViewID) => {
     }
 }
 
-export { renderDashboard, toggleView };
+const bookNow = () => {
+    console.log("booking!");
+}
+
+export { renderDashboard, toggleView, bookNow };
