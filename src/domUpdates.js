@@ -84,7 +84,8 @@ const confirmDate = () => {
 
     selectDatePanel.classList.add('slide-out');
     setTimeout(() => {
-        selectDatePanel.classList.add('hidden');
+        selectDatePanel.classList.add('hidden')
+        selectDatePanel.classList.remove('slide-out');
         selectRoomTypePanel.classList.remove('hidden');
         selectRoomTypePanel.classList.add('slide-in');
     }, 500);
@@ -98,6 +99,7 @@ const confirmRoomType = () => {
     selectRoomTypePanel.classList.add('slide-out');
     setTimeout(() => {
         selectRoomTypePanel.classList.add('hidden');
+        selectRoomTypePanel.classList.remove('slide-out');
         roomsAvailablePanel.classList.remove('hidden');
         roomsAvailablePanel.classList.add('slide-in');
         getRoomsAvailable(roomsFilteredByDateAndType);
@@ -120,6 +122,7 @@ const getRoomDetails = (roomNumber) => {
     roomsAvailablePanel.classList.add('slide-out');
     setTimeout(() => {
         roomsAvailablePanel.classList.add('hidden');
+        roomsAvailablePanel.classList.remove('slide-out');
         confirmBookingPanel.classList.remove('hidden');
         confirmBookingPanel.classList.add('slide-in');
     }, 500);
@@ -139,6 +142,7 @@ const confirmBooking = () => {
     confirmBookingPanel.classList.add('slide-out');
     setTimeout(() => {
         confirmBookingPanel.classList.add('hidden');
+        confirmBookingPanel.classList.remove('slide-out');
         bookingConfirmationPanel.classList.remove('hidden');
         bookingConfirmationPanel.classList.add('slide-in');
     }, 500);
@@ -159,6 +163,8 @@ const confirmBooking = () => {
 }
 
 const returnToDash = () => {
+    bookingConfirmationPanel.classList.add('hidden');
+    bookingConfirmationPanel.classList.remove('slide-in');
     nav.classList.remove('blur', 'no-click');
     costAndToggle.classList.remove('blur', 'no-click');
     bookings.classList.remove('blur', 'no-click');
