@@ -11,67 +11,80 @@
 <body>
   <section id="nav">
     <p id="home">Overlook</p>
-    <div>
+    <div class="hidden">
       <button class="action-btn" id="bookNowBtn"><span>Book Now! </span></button>
       <img id="userSettings" src="./images/user.png" alt="User settings" />
     </div>
   </section>
-  <section class="hidden" id="newBooking">
-    <div id="bookingContainer">
-      <div>
-        <img tabindex="1" role="button" class="nav-btn" src="./images/back.png" alt="Previous step"></img>
-        <img tabindex="1" role="button" class="nav-btn" src="./images/delete.png" alt="Exit panel"></img>
-      </div>
-      <section class="panel hidden" id="selectDatePanel">
-        <div id="datePicker">
-          <label for="bookingDate">What date are you looking to book?</label>
-          <input type="date" id="bookingDate" name="trip-start" onfocus="this.value=new Date().toISOString().split('T')[0], this.min=new Date().toISOString().split('T')[0]">
-          <button class="action-btn" id="confirmDate"><span>Next </span></button>
+  <section id="login">
+    <h1>Please Login:</h1>
+    <form>
+      <label for="username">username:</label>
+      <input type="text" id="username" name="username"><br><br>
+      <label for="pass">password:</label>
+      <input type="password" id="pass" name="pass"><br><br>
+      <input type="button" id="submit" value="Login">
+    </form>
+  </section>
+  <main class="hidden">
+    <section class="hidden" id="newBooking">
+      <div id="bookingContainer">
+        <div>
+          <img tabindex="1" role="button" class="nav-btn" src="./images/back.png" alt="Previous step"></img>
+          <img tabindex="1" role="button" class="nav-btn" src="./images/delete.png" alt="Exit panel"></img>
         </div>
-      </section>
-      <section class="panel hidden" id="selectRoomTypePanel">
-        <label for="roomSelect">What type of room?</label>
-        <select name="rooms" id="roomSelect">
-            <option value="single room">single room</option>
-            <option value="junior suite">junior suite</option>
-            <option value="suite">suite</option>
-            <option value="residential suite">residential suite</option>
-        </select>
-        <button class="action-btn" id="confirmRoomType"><span>Next </span></button>
-      </section>
-      <section class="panel hidden" id="roomsAvailablePanel">
-        <p>Rooms available:</p>
-        <section id="roomsAvailable"></section>
-      </section>
-      <section class="panel hidden" id="confirmBookingPanel">
-        <p>Room details:</p>
-        <section id="roomDetails"></section>
-        <button class="action-btn" id="confirmBookingBtn"><span>Confirm Booking! </span></button>
-      </section>
-      <section class="panel hidden" id="bookingConfirmationPanel">
-        <p>Thanks for booking with Overlook!</p>
-        <p>Confirmation details:</p>
-        <section id="confirmationDetails"></section>
-        <button class="action-btn" id="returnToDash"><span>Return to Dashboard </span></button>
-      </section>
-    </div>
-  </section>
-  <section id="costAndToggle">
-    <p id="totalAmountSpentTitle">Total Amount Spent on Rooms</p>
-    <div>
-      <span>$</span>
-      <span id="totalAmountSpentDollars"></span>
-      <span>.</span>
-      <span id="leadingZero">0</span>
-      <span id="cents"></span>
-    </div>
-    <p id="bookingsToggleTitle">Bookings</p>
-    <div id="bookingsToggle">
-      <p class="toggle-option selected-view" id="upcoming">Upcoming</p>
-      <p class="toggle-option unselected-view" id="previous">Previous</p>
-    </div>
-  </section>
-  <section id="bookings"></section>
+        <section class="panel hidden" id="selectDatePanel">
+          <div id="datePicker">
+            <label for="bookingDate">What date are you looking to book?</label>
+            <input type="date" id="bookingDate" name="trip-start" onfocus="this.value=new Date().toISOString().split('T')[0], this.min=new Date().toISOString().split('T')[0]">
+            <button class="action-btn" id="confirmDate"><span>Next </span></button>
+          </div>
+        </section>
+        <section class="panel hidden" id="selectRoomTypePanel">
+          <label for="roomSelect">What type of room?</label>
+          <select name="rooms" id="roomSelect">
+              <option value="single room">single room</option>
+              <option value="junior suite">junior suite</option>
+              <option value="suite">suite</option>
+              <option value="residential suite">residential suite</option>
+          </select>
+          <button class="action-btn" id="confirmRoomType"><span>Next </span></button>
+        </section>
+        <section class="panel hidden" id="roomsAvailablePanel">
+          <p>Rooms available:</p>
+          <section id="roomsAvailable"></section>
+        </section>
+        <section class="panel hidden" id="confirmBookingPanel">
+          <p>Room details:</p>
+          <section id="roomDetails"></section>
+          <button class="action-btn" id="confirmBookingBtn"><span>Confirm Booking! </span></button>
+        </section>
+        <section class="panel hidden" id="bookingConfirmationPanel">
+          <p>Thanks for booking with Overlook!</p>
+          <p>Confirmation details:</p>
+          <section id="confirmationDetails"></section>
+          <button class="action-btn" id="returnToDash"><span>Return to Dashboard </span></button>
+        </section>
+      </div>
+    </section>
+    <section id="costAndToggle">
+      <p id="totalAmountSpentTitle">Total Amount Spent on Rooms</p>
+      <div>
+        <span>$</span>
+        <span id="totalAmountSpentDollars"></span>
+        <span>.</span>
+        <span id="leadingZero">0</span>
+        <span id="cents"></span>
+      </div>
+      <p id="bookingsToggleTitle">Bookings</p>
+      <div id="bookingsToggle">
+        <p class="toggle-option selected-view" id="upcoming">Upcoming</p>
+        <p class="toggle-option unselected-view" id="previous">Previous</p>
+      </div>
+    </section>
+    <section id="bookings"></section>
+  </main>
+  
   <!-- Do not include the scripts.js or class files here - it is done by the webpack server -->
   <script src="bundle.js"></script>
 </body>

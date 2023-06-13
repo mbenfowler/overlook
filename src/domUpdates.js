@@ -69,7 +69,7 @@ const bookNow = () => {
     newBooking.classList.remove('hidden');
     newBooking.classList.add('fade-in');
     selectDatePanel.classList.remove('hidden');
-    date.value = new Date().toISOString().split('T')[0];
+    date.valueAsDate = new Date();
 }
 
 const confirmDate = () => {

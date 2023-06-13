@@ -8,9 +8,13 @@ import './images/turing-logo.png';
 import './images/user.png';
 import './images/delete.png';
 import './images/back.png';
+import './images/overlook-background.png';
 
 
 // query selectors
+const userInput = document.querySelector('#username');
+const passInput = document.querySelector('#pass');
+const submitLogin = document.querySelector('#submit');
 const bookings = document.querySelector('#bookings');
 const root = document.querySelector(':root');
 const leadingZero = document.querySelector('#leadingZero');
@@ -33,6 +37,15 @@ const returnToDashBtn = document.querySelector('#returnToDash');
 
 // event listeners
 window.addEventListener('load', loadData);
+
+submitLogin.addEventListener('click', () => {
+    const user = userLookup(userInput.value);
+    if (user && passInput.value === 'overlook2021') {
+        // hide login, load user data and unhide dash
+    } else {
+        // Incorrect username or password, try again
+    }
+});
 
 bookingsToggle.addEventListener('click', (e) => {
     if (e.target.classList.contains("unselected-view")) {
@@ -98,4 +111,4 @@ returnToDashBtn.addEventListener('keyup', (e) => {
     }
 });
 
-export { bookings, root, leadingZero, upcomingBookings, previousBookings, newBooking, selectRoomTypePanel, roomSelect, roomsAvailablePanel, roomsAvailable, date, confirmBookingPanel, roomDetails };
+export { userInput, passInput, bookings, root, leadingZero, upcomingBookings, previousBookings, newBooking, selectRoomTypePanel, roomSelect, roomsAvailablePanel, roomsAvailable, date, confirmBookingPanel, roomDetails };
