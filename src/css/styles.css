@@ -47,7 +47,7 @@ div {
   flex-direction: row;
 }
 
-#bookNowBtn {
+.action-btn {
   width: 150px;
   height: 50px;
   background-color: blue;
@@ -59,17 +59,17 @@ div {
   transition: all 0.5s;
 }
 
-#bookNowBtn:hover {
+.action-btn:hover {
   box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 }
 
-#bookNowBtn span {
+.action-btn span {
   cursor: pointer;
   position: relative;
   transition: 0.5s;
 }
 
-#bookNowBtn span::after {
+.action-btn span::after {
   content: '\00bb';
   position: absolute;
   opacity: 0;
@@ -78,11 +78,11 @@ div {
   transition: 0.5s;
 }
 
-#bookNowBtn:hover span {
+.action-btn:hover span {
   padding-right: 20px;
 }
 
-#bookNowBtn:hover span::after {
+.action-btn:hover span::after {
   opacity: 1;
   right: 0;
 }
@@ -158,7 +158,8 @@ div {
   }
 }
 
-#bookingsToggleTitle {
+#bookingsToggleTitle,
+#confirmBookingPanel p {
   font-size: xx-large;
   margin: 0 0 5px;
 }
@@ -238,6 +239,190 @@ div {
   align-items: center;
 }
 
+/* book room flow */
+
+#newBooking {
+  position: fixed;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 85%;
+  max-height: 95%;
+  border-radius: 50px;
+  z-index: 1;
+  background-image: linear-gradient(to right, #535a72cc, #171d2fcc);
+  min-width: 500px;
+}
+
+#bookingContainer {
+  height: 90%;
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  overflow: clip;
+  border-radius: 50px;
+  background-color: white;
+}
+
+#bookingContainer > div {
+  width: 100%;
+  justify-content: space-between;
+}
+
+.nav-btn {
+  height: 50px;
+  width: 50px;
+  margin: 30px;
+  cursor: pointer;
+}
+
+.nav-btn:hover,
+.room-card:hover {
+  transition: .2s;
+  transform: scale(1.2);
+}
+
+.panel {
+  flex-direction: column;
+  background-color: white;
+  height: 80%;
+  width: 95%;
+  border-radius: 50px;
+}
+
 .hidden {
   display: none;
+}
+
+.no-click {
+  pointer-events: none;
+}
+
+.blur {
+  filter: blur(4px);
+}
+
+.fade-in {
+  animation: fade-in 0.5s ease-in forwards;
+}
+
+@keyframes fade-in {
+  0% {
+    visibility: hidden;
+    opacity: 0;
+    height: 0%;
+  }
+  30% {
+    visibility: hidden;
+    opacity: 0;
+  }
+  60% {
+    visibility: visible;
+    opacity: 1;
+  }
+  100% {
+    visibility: visible;
+    opacity: 1;
+    height: 98%;
+  }
+}
+
+.slide-out {
+  animation: slide-out .5s ease-in forwards;
+}
+
+@keyframes slide-out {
+  0% {
+    border: black;
+    border-style: solid;
+    visibility: visible;
+    opacity: 1;
+    transform: translateX(0px);
+  }
+  100% {
+    visibility: hidden;
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+}
+
+.slide-in {
+  animation: slide-in 1.5s ease-out forwards;
+}
+
+@keyframes slide-in {
+  0% {
+    border: black;
+    border-style: solid;
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  40% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  100% {
+    border: none;
+  }
+}
+
+#datePicker {
+  height: 100%;
+  width: 100%;
+  flex-direction: column;
+}
+
+.panel label {
+  font-size: 50px;
+  margin-bottom: 50px;
+}
+
+#datePicker input {
+  font-size: 50px;
+  margin-bottom: 50px;
+}
+
+#selectRoomTypePanel select {
+  font-size: 30px;
+  margin-bottom: 50px;
+}
+
+#roomsAvailablePanel p {
+  font-size: 50px;
+  margin-top: 0;
+}
+
+#roomsAvailable {
+  flex-direction: column;
+  overflow-y: scroll;
+  padding-top: 10px;
+}
+
+.room-card {
+  justify-content: space-around;
+  height: 50px;
+  min-height: 50px;
+  width: 50%;
+  border: gray solid;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+#roomDetails,
+#confirmationDetails {
+  justify-content: flex-start;
+  flex-direction: column;
+  height: 200px;
+}
+
+#confirmationDetails p {
+  margin: 0;
+}
+
+#confirmBookingBtn,
+#returnToDash {
+  width: 215px;
 }
