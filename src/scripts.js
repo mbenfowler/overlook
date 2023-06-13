@@ -29,7 +29,7 @@ const roomsAvailable = document.querySelector("#roomsAvailable");
 const roomDetails = document.querySelector("#roomDetails");
 const confirmBookingPanel = document.querySelector('#confirmBookingPanel');
 const confirmBookingBtn = document.querySelector('#confirmBookingBtn');
-const returnToDashBtn = document.querySelector('#returnToDash')
+const returnToDashBtn = document.querySelector('#returnToDash');
 
 // event listeners
 window.addEventListener('load', loadData);

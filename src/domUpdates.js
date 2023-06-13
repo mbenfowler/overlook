@@ -131,7 +131,7 @@ const getRoomDetails = (roomNumber) => {
         <p>${selectedRoom.numBeds} ${selectedRoom.bedSize} bed(s)</p>
         <p>Bidet? <span id="hasBidet">${hasBidet}</span></p>
         <p>Cost per night: $${selectedRoom.costPerNight}</p>
-    `
+    `;
 }
 
 const confirmBooking = () => {
