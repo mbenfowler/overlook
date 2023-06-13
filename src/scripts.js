@@ -1,7 +1,7 @@
 // An example of how you tell webpack to use a CSS (SCSS) file
 import './css/styles.css';
 import { loadData } from './apiCalls';
-import { toggleView, bookNow, confirmDate, confirmRoomType, getRoomDetails, confirmBooking } from './domUpdates';
+import { toggleView, bookNow, confirmDate, confirmRoomType, getRoomDetails, confirmBooking, returnToDash } from './domUpdates';
 
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
 import './images/turing-logo.png';
@@ -27,8 +27,9 @@ const confirmRoomTypeBtn = document.querySelector("#confirmRoomType");
 const roomsAvailablePanel = document.querySelector("#roomsAvailablePanel");
 const roomsAvailable = document.querySelector("#roomsAvailable");
 const roomDetails = document.querySelector("#roomDetails");
-const confirmBookingPanel = document.querySelector('#confirmBookingPanel')
-const confirmBookingBtn = document.querySelector('#confirmBookingBtn')
+const confirmBookingPanel = document.querySelector('#confirmBookingPanel');
+const confirmBookingBtn = document.querySelector('#confirmBookingBtn');
+const returnToDashBtn = document.querySelector('#returnToDash')
 
 // event listeners
 window.addEventListener('load', loadData);
@@ -86,6 +87,14 @@ confirmBookingBtn.addEventListener('click', confirmBooking);
 confirmBookingBtn.addEventListener('keyup', (e) => {
     if (e.key === 'Enter') {
         confirmBooking();
+    }
+});
+
+returnToDashBtn.addEventListener('click', returnToDash);
+
+returnToDashBtn.addEventListener('keyup', (e) => {
+    if (e.key === 'Enter') {
+        returnToDash();
     }
 });
 

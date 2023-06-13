@@ -2,7 +2,7 @@ import { bookings, root, leadingZero, upcomingBookings, previousBookings, newBoo
 import { toggleBtns } from "./helperFunctions";
 import { getTotalSpent } from "./user";
 import { getBookingsByView } from "./bookings";
-import { pageData, addBooking } from "./apiCalls";
+import { pageData, loadData, addBooking } from "./apiCalls";
 
 let currentView = 'upcoming';
 let selectedDate;
@@ -144,6 +144,7 @@ const confirmBooking = () => {
     }, 500);
 
     addBooking(selectedDate, selectedRoom.number);
+    loadData();
 
     setTimeout(() => {
         confirmationDetails.innerHTML = `
@@ -157,4 +158,12 @@ const confirmBooking = () => {
     }, 100);
 }
 
-export { renderDashboard, toggleView, bookNow, confirmDate, confirmRoomType, getRoomDetails, confirmBooking };
+const returnToDash = () => {
+    nav.classList.remove('blur', 'no-click');
+    costAndToggle.classList.remove('blur', 'no-click');
+    bookings.classList.remove('blur', 'no-click');
+    newBooking.classList.add('hidden');
+    newBooking.classList.remove('fade-in');
+}
+
+export { renderDashboard, toggleView, bookNow, confirmDate, confirmRoomType, getRoomDetails, confirmBooking, returnToDash };

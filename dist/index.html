@@ -24,13 +24,13 @@
       </div>
       <section class="panel hidden" id="selectDatePanel">
         <div id="datePicker">
-          <label for="start">What date are you looking to book?</label>
+          <label for="bookingDate">What date are you looking to book?</label>
           <input type="date" id="bookingDate" name="trip-start" onfocus="this.value=new Date().toISOString().split('T')[0], this.min=new Date().toISOString().split('T')[0]">
           <button class="action-btn" id="confirmDate"><span>Next </span></button>
         </div>
       </section>
       <section class="panel hidden" id="selectRoomTypePanel">
-        <label for="rooms-select">What type of room?</label>
+        <label for="roomSelect">What type of room?</label>
         <select name="rooms" id="roomSelect">
             <option value="single room">single room</option>
             <option value="junior suite">junior suite</option>
@@ -52,7 +52,7 @@
         <p>Thanks for booking with Overlook!</p>
         <p>Confirmation details:</p>
         <section id="confirmationDetails"></section>
-        <button class="action-btn" id="closeBtn"><span>Return to Dashboard </span></button>
+        <button class="action-btn" id="returnToDash"><span>Return to Dashboard </span></button>
       </section>
     </div>
   </section>
