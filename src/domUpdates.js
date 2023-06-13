@@ -1,13 +1,15 @@
-import { bookings, root, leadingZero, upcomingBookings, previousBookings, newBooking, selectRoomTypePanel, roomSelect, roomsAvailablePanel, roomsAvailable, date } from "./scripts";
+import { bookings, root, leadingZero, upcomingBookings, previousBookings, newBooking, selectRoomTypePanel, roomSelect, roomsAvailablePanel, roomsAvailable, date, roomDetails, confirmBookingPanel } from "./scripts";
 import { toggleBtns } from "./helperFunctions";
 import { getTotalSpent } from "./user";
 import { getBookingsByView } from "./bookings";
-import { pageData } from "./apiCalls";
+import { pageData, addBooking } from "./apiCalls";
 
 let currentView = 'upcoming';
-let today;
 let selectedDate;
+let roomsFilteredByDate;
 let selectedRoomType;
+let selectedRoom;
+let hasBidet;
 
 const renderDashboard = (pageData) => {
     const bookingsByView = getBookingsByView(pageData.currentUserBookings, currentView);
@@ -71,8 +73,15 @@ const bookNow = () => {
 }
 
 const confirmDate = () => {
-    selectedDate = date.value;
-    // filter room availability by date
+    selectedDate = date.value.replaceAll('-', '/');
+    roomsFilteredByDate = pageData.allRooms.filter(room => {
+        const foundBooking = pageData.allBookings.find(booking => {
+            return booking.date === selectedDate && booking.roomNumber === room.number;
+        });
+        
+        if(!foundBooking) return room;
+    });
+
     selectDatePanel.classList.add('slide-out');
     setTimeout(() => {
         selectDatePanel.classList.add('hidden');
@@ -83,20 +92,69 @@ const confirmDate = () => {
 
 const confirmRoomType = () => {
     selectedRoomType = roomSelect.value;
-    // filter room availability by room Type
+    const roomsFilteredByDateAndType = roomsFilteredByDate.filter(room => room.roomType === selectedRoomType);
+
     selectRoomTypePanel.classList.remove('slide-in');
     selectRoomTypePanel.classList.add('slide-out');
     setTimeout(() => {
         selectRoomTypePanel.classList.add('hidden');
         roomsAvailablePanel.classList.remove('hidden');
         roomsAvailablePanel.classList.add('slide-in');
-        getRoomsAvailable();
+        getRoomsAvailable(roomsFilteredByDateAndType);
     }, 500);
 }
 
-const getRoomsAvailable = () => {
-    // make single column of room cards
-    roomsAvailable.innerHTML = `weeeeeee`;
+const getRoomsAvailable = (rooms) => {
+    roomsAvailable.innerHTML = '';
+    rooms.forEach(room => {
+        roomsAvailable.innerHTML += `
+            <div tabindex=1 class=room-card id=${room.number}>
+                <span>${room.numBeds} ${room.bedSize} bed(s)</span> <span>$${room.costPerNight}</span>
+            </div>
+        `;
+    });
 }
 
-export { renderDashboard, toggleView, bookNow, confirmDate, confirmRoomType };
+const getRoomDetails = (roomNumber) => {
+    roomsAvailablePanel.classList.remove('slide-in');
+    roomsAvailablePanel.classList.add('slide-out');
+    setTimeout(() => {
+        roomsAvailablePanel.classList.add('hidden');
+        confirmBookingPanel.classList.remove('hidden');
+        confirmBookingPanel.classList.add('slide-in');
+    }, 500);
+
+    selectedRoom = pageData.allRooms.find(room => room.number === Number(roomNumber));
+    hasBidet = selectedRoom.bidet ? 'Yes' : 'No';
+    roomDetails.innerHTML = `
+        <p>${selectedRoom.roomType}</p>
+        <p>${selectedRoom.numBeds} ${selectedRoom.bedSize} bed(s)</p>
+        <p>Bidet? <span id="hasBidet">${hasBidet}</span></p>
+        <p>Cost per night: $${selectedRoom.costPerNight}</p>
+    `
+}
+
+const confirmBooking = () => {
+    confirmBookingPanel.classList.remove('slide-in');
+    confirmBookingPanel.classList.add('slide-out');
+    setTimeout(() => {
+        confirmBookingPanel.classList.add('hidden');
+        bookingConfirmationPanel.classList.remove('hidden');
+        bookingConfirmationPanel.classList.add('slide-in');
+    }, 500);
+
+    addBooking(selectedDate, selectedRoom.number);
+
+    setTimeout(() => {
+        confirmationDetails.innerHTML = `
+            <p>Confirmation No. ${pageData.latestBookingID}</p>
+            <p>Room No. ${selectedRoom.number}</p>
+            <p>${selectedRoom.roomType}</p>
+            <p>${selectedRoom.numBeds} ${selectedRoom.bedSize} bed(s)</p>
+            <p>Bidet? <span id="hasBidet">${hasBidet}</span></p>
+            <p>Cost per night: $${selectedRoom.costPerNight}</p>
+        `
+    }, 100);
+}
+
+export { renderDashboard, toggleView, bookNow, confirmDate, confirmRoomType, getRoomDetails, confirmBooking };

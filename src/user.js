@@ -1,7 +1,8 @@
 import { getRandomIndex } from "./helperFunctions";
 
 const getRandomUser = users => {
-    return users[getRandomIndex(users)];
+    return users[0];
+    // return users[getRandomIndex(users)];
 }
 
 const getTotalSpent = (bookings, rooms) => {

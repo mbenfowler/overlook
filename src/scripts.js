@@ -1,7 +1,7 @@
 // An example of how you tell webpack to use a CSS (SCSS) file
 import './css/styles.css';
 import { loadData } from './apiCalls';
-import { toggleView, bookNow, confirmDate, confirmRoomType } from './domUpdates';
+import { toggleView, bookNow, confirmDate, confirmRoomType, getRoomDetails, confirmBooking } from './domUpdates';
 
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
 import './images/turing-logo.png';
@@ -26,6 +26,9 @@ const roomSelect = document.querySelector("#roomSelect");
 const confirmRoomTypeBtn = document.querySelector("#confirmRoomType");
 const roomsAvailablePanel = document.querySelector("#roomsAvailablePanel");
 const roomsAvailable = document.querySelector("#roomsAvailable");
+const roomDetails = document.querySelector("#roomDetails");
+const confirmBookingPanel = document.querySelector('#confirmBookingPanel')
+const confirmBookingBtn = document.querySelector('#confirmBookingBtn')
 
 // event listeners
 window.addEventListener('load', loadData);
@@ -66,4 +69,24 @@ confirmRoomTypeBtn.addEventListener('keyup', (e) => {
     }
 });
 
-export { bookings, root, leadingZero, upcomingBookings, previousBookings, newBooking, selectRoomTypePanel, roomSelect, roomsAvailablePanel, roomsAvailable, date };
+roomsAvailable.addEventListener('click', (e) => {
+    if (e.target.classList && e.target.closest('.room-card')) {
+        getRoomDetails(e.target.closest('.room-card').id);
+    }
+});
+
+roomsAvailable.addEventListener('keyup', (e) => {
+    if (e.key === 'Enter') {
+        getRoomDetails(e.target.closest('.room-card').id);
+    }
+});
+
+confirmBookingBtn.addEventListener('click', confirmBooking);
+
+confirmBookingBtn.addEventListener('keyup', (e) => {
+    if (e.key === 'Enter') {
+        confirmBooking();
+    }
+});
+
+export { bookings, root, leadingZero, upcomingBookings, previousBookings, newBooking, selectRoomTypePanel, roomSelect, roomsAvailablePanel, roomsAvailable, date, confirmBookingPanel, roomDetails };

@@ -1,21 +1,23 @@
 import { getRandomUser } from './user';
 import { renderDashboard } from './domUpdates';
 
-let currentUser;
 let pageData = {
+  currentUser: {},
   currentUserBookings: [],
-  allRooms: []
+  allRooms: [],
+  allBookings: []
 };
 
 const getAllUsers = () => fetch('http://localhost:3001/api/v1/customers');
 const getAllBookings = () => fetch('http://localhost:3001/api/v1/bookings');
 const getAllRooms = () => fetch('http://localhost:3001/api/v1/rooms');
 
-const handleUserData = users => currentUser = getRandomUser(users);
+const handleUserData = users => pageData.currentUser = getRandomUser(users);
 
 const handleBookingsData = bookings => {
+  pageData.allBookings = bookings;
   setTimeout(() => {
-    pageData.currentUserBookings = bookings.filter(booking => booking.userID === currentUser.id);
+    pageData.currentUserBookings = bookings.filter(booking => booking.userID === pageData.currentUser.id);
     renderDashboard(pageData);
   }, 10);
 }
@@ -43,4 +45,26 @@ const loadData = () => {
   })   
 }
 
-export { loadData, pageData };
+const addBooking = (date, roomNumber) => {
+  const requestOptions = {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json'
+    }
+  };
+
+  requestOptions.body = JSON.stringify({ 
+    "userID": pageData.currentUser.id, 
+    "date": date, 
+    "roomNumber": roomNumber
+  });
+  
+  fetch('http://localhost:3001/api/v1/bookings', requestOptions)
+    .then(response => response.json())
+    .then(data => {
+      pageData.latestBookingID = data.newBooking.id;
+    })
+    .catch(error => console.error(error));
+}
+
+export { loadData, pageData, addBooking };

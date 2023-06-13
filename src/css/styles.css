@@ -158,7 +158,8 @@ div {
   }
 }
 
-#bookingsToggleTitle {
+#bookingsToggleTitle,
+#confirmBookingPanel p {
   font-size: xx-large;
   margin: 0 0 5px;
 }
@@ -278,7 +279,8 @@ div {
   cursor: pointer;
 }
 
-.nav-btn:hover {
+.nav-btn:hover,
+.room-card:hover {
   transition: .2s;
   transform: scale(1.2);
 }
@@ -391,4 +393,36 @@ div {
 #roomsAvailablePanel p {
   font-size: 50px;
   margin-top: 0;
+}
+
+#roomsAvailable {
+  flex-direction: column;
+  overflow-y: scroll;
+  padding-top: 10px;
+}
+
+.room-card {
+  justify-content: space-around;
+  height: 50px;
+  min-height: 50px;
+  width: 50%;
+  border: gray solid;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+#roomDetails,
+#confirmationDetails {
+  justify-content: flex-start;
+  flex-direction: column;
+  height: 200px;
+}
+
+#confirmationDetails p {
+  margin: 0;
+}
+
+#confirmBookingBtn,
+#closeBtn {
+  width: 215px;
 }
