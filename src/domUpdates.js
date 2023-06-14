@@ -131,7 +131,10 @@ const confirmDate = (date) => {
 const confirmRoomType = () => {
     selectedRoomType = roomSelect.value;
     currentPanel = 'roomsAvailablePanel';
-    const roomsFilteredByDateAndType = roomsFilteredByDate.filter(room => room.roomType === selectedRoomType);
+    let roomsFilteredByDateAndType = roomsFilteredByDate;
+    if (selectedRoomType !== 'any') {
+        roomsFilteredByDateAndType = roomsFilteredByDate.filter(room => room.roomType === selectedRoomType);
+    }
 
     selectRoomTypePanel.classList.remove('slide-in');
     selectRoomTypePanel.classList.add('slide-out');
