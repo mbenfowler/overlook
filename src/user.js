@@ -1,10 +1,3 @@
-// import { getRandomIndex } from "./helperFunctions";
-
-// const getRandomUser = users => {
-//     return users[0];
-//     return users[getRandomIndex(users)];
-// }
-
 const userLookup = (username) => {
     const slicedUsername = Number(username.slice(8))
     if (username.startsWith('customer') && slicedUsername <= 50 && slicedUsername > 0) {

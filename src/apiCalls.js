@@ -1,4 +1,3 @@
-import { getRandomUser } from './user';
 import { renderDashboard } from './domUpdates';
 
 let pageData = {
@@ -16,8 +15,6 @@ const getUser = (userID) => {
 }
 const getAllBookings = () => fetch('http://localhost:3001/api/v1/bookings');
 const getAllRooms = () => fetch('http://localhost:3001/api/v1/rooms');
-
-// const handleUserData = (users, userID) => pageData.currentUser = users.find(user => user.id === userID);
 
 const handleBookingsData = bookings => {
   pageData.allBookings = bookings;
