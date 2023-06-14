@@ -44,6 +44,7 @@ div {
 #login {
   background-image: url('../images/overlook-background.png');
   flex-direction: column;
+  height: 100%;
 }
 
 #home {
