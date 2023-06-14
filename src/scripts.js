@@ -64,7 +64,9 @@ bookNowBtn.addEventListener('keyup', (e) => {
     }
 });
 
-confirmDateBtn.addEventListener('click', confirmDate);
+confirmDateBtn.addEventListener('click', () => {
+    confirmDate(date)
+});
 
 confirmDateBtn.addEventListener('keyup', (e) => {
     if (e.key === 'Enter') {

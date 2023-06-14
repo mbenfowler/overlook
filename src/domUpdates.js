@@ -85,23 +85,27 @@ const bookNow = () => {
     date.valueAsDate = new Date();
 }
 
-const confirmDate = () => {
-    selectedDate = date.value.replaceAll('-', '/');
-    roomsFilteredByDate = pageData.allRooms.filter(room => {
-        const foundBooking = pageData.allBookings.find(booking => {
-            return booking.date === selectedDate && booking.roomNumber === room.number;
+const confirmDate = (date) => {
+    if ( date.valueAsDate < new Date().setDate(new Date().getDate() - 1)) {
+        alert("What are you Marty McFly? Please pick a future date.")
+    } else {
+        selectedDate = date.value.replaceAll('-', '/');
+        roomsFilteredByDate = pageData.allRooms.filter(room => {
+            const foundBooking = pageData.allBookings.find(booking => {
+                return booking.date === selectedDate && booking.roomNumber === room.number;
+            });
+            
+            if(!foundBooking) return room;
         });
-        
-        if(!foundBooking) return room;
-    });
 
-    selectDatePanel.classList.add('slide-out');
-    setTimeout(() => {
-        selectDatePanel.classList.add('hidden')
-        selectDatePanel.classList.remove('slide-out');
-        selectRoomTypePanel.classList.remove('hidden');
-        selectRoomTypePanel.classList.add('slide-in');
-    }, 500);
+        selectDatePanel.classList.add('slide-out');
+        setTimeout(() => {
+            selectDatePanel.classList.add('hidden')
+            selectDatePanel.classList.remove('slide-out');
+            selectRoomTypePanel.classList.remove('hidden');
+            selectRoomTypePanel.classList.add('slide-in');
+        }, 500);
+    }
 }
 
 const confirmRoomType = () => {
