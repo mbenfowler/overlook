@@ -417,6 +417,11 @@ div {
   padding-top: 10px;
 }
 
+#roomsAvailable p {
+  font-size: large;
+  width: 75%;
+}
+
 .room-card {
   justify-content: space-around;
   height: 50px;

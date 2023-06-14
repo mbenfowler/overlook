@@ -121,13 +121,19 @@ const confirmRoomType = () => {
 
 const getRoomsAvailable = (rooms) => {
     roomsAvailable.innerHTML = '';
-    rooms.forEach(room => {
-        roomsAvailable.innerHTML += `
-            <div tabindex=1 class=room-card id=${room.number}>
-                <span>${room.numBeds} ${room.bedSize} bed(s)</span> <span>$${room.costPerNight}</span>
-            </div>
-        `;
-    });
+    if (!rooms.length) {
+        roomsAvailable.innerHTML = `
+            <p>We're supremely sorry, but no rooms of this type are available on the day you requested. Please try again for an alternate day and/or room type.</p>
+        `
+    } else {
+        rooms.forEach(room => {
+            roomsAvailable.innerHTML += `
+                <div tabindex=1 class=room-card id=${room.number}>
+                    <span>${room.numBeds} ${room.bedSize} bed(s)</span> <span>$${room.costPerNight}</span>
+                </div>
+            `;
+        });
+    }
 }
 
 const getRoomDetails = (roomNumber) => {
