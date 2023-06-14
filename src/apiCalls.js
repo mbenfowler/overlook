@@ -12,7 +12,7 @@ const getAllUsers = () => fetch('http://localhost:3001/api/v1/customers');
 const getAllBookings = () => fetch('http://localhost:3001/api/v1/bookings');
 const getAllRooms = () => fetch('http://localhost:3001/api/v1/rooms');
 
-const handleUserData = users => pageData.currentUser = getRandomUser(users);
+const handleUserData = (users , userID) => pageData.currentUser = users.find(user => user.id === userID);
 
 const handleBookingsData = bookings => {
   pageData.allBookings = bookings;
@@ -22,7 +22,7 @@ const handleBookingsData = bookings => {
   }, 10);
 }
 
-const loadData = () => {
+const loadData = (userID) => {
     Promise.all([getAllUsers(), getAllBookings(), getAllRooms()])
     .then (responses => {
       responses.forEach(response => {
@@ -31,7 +31,7 @@ const loadData = () => {
           .then (data => {
             const functions = {
               rooms: (rooms) => pageData.allRooms = rooms,
-              customers: (users) => handleUserData(users), 
+              customers: (users) => handleUserData(users, userID), 
               bookings: (bookings) => handleBookingsData(bookings)
             };
             const property = response.url.split('/').reverse()[0];
