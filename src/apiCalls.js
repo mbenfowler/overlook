@@ -21,7 +21,7 @@ const handleBookingsData = bookings => {
   setTimeout(() => {
     pageData.currentUserBookings = bookings.filter(booking => booking.userID === pageData.currentUser.id);
     renderDashboard(pageData);
-  }, 500);
+  }, 750);
 }
 
 const loadData = () => {

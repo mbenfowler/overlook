@@ -285,7 +285,7 @@ div {
 
 #bookingContainer > div {
   width: 100%;
-  justify-content: space-between;
+  justify-content: flex-end;
 }
 
 .nav-btn {
@@ -415,6 +415,11 @@ div {
   flex-direction: column;
   overflow-y: scroll;
   padding-top: 10px;
+}
+
+#roomsAvailable p {
+  font-size: large;
+  width: 75%;
 }
 
 .room-card {

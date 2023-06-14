@@ -5,6 +5,7 @@ import { getBookingsByView } from "./bookings";
 import { pageData, getUser, loadData, addBooking } from "./apiCalls";
 
 let currentView = 'upcoming';
+let currentPanel;
 let selectedDate;
 let roomsFilteredByDate;
 let selectedRoomType;
@@ -76,36 +77,60 @@ const toggleView = (clickedViewID) => {
 }
 
 const bookNow = () => {
+    currentPanel = 'selectDatePanel';
     nav.classList.add('blur', 'no-click');
     costAndToggle.classList.add('blur', 'no-click');
     bookings.classList.add('blur', 'no-click');
     newBooking.classList.remove('hidden');
     newBooking.classList.add('fade-in');
     selectDatePanel.classList.remove('hidden');
-    date.valueAsDate = new Date();
 }
 
-const confirmDate = () => {
-    selectedDate = date.value.replaceAll('-', '/');
-    roomsFilteredByDate = pageData.allRooms.filter(room => {
-        const foundBooking = pageData.allBookings.find(booking => {
-            return booking.date === selectedDate && booking.roomNumber === room.number;
-        });
+const goToPreviousPanel = () => {
+    if (currentPanel === 'selectDatePanel') {
+        exitPanel();
+    } else {
         
-        if(!foundBooking) return room;
-    });
+    }
+}
 
-    selectDatePanel.classList.add('slide-out');
-    setTimeout(() => {
-        selectDatePanel.classList.add('hidden')
-        selectDatePanel.classList.remove('slide-out');
-        selectRoomTypePanel.classList.remove('hidden');
-        selectRoomTypePanel.classList.add('slide-in');
-    }, 500);
+const exitPanel = () => {
+    if (currentPanel !== 'selectDatePanel') {
+        const thisPanel = document.querySelector(`#${currentPanel}`);
+        thisPanel.classList.add('hidden');
+        thisPanel.classList.remove('slide-in');
+    }
+    
+    returnToDash();
+}
+
+const confirmDate = (date) => {
+    if (date.valueAsDate < new Date().setDate(new Date().getDate() - 1)) {
+        alert("What are you Marty McFly? Please pick a future date.")
+    } else {
+        currentPanel = 'selectRoomTypePanel';
+        selectedDate = date.value.replaceAll('-', '/');
+        roomsFilteredByDate = pageData.allRooms.filter(room => {
+            const foundBooking = pageData.allBookings.find(booking => {
+                return booking.date === selectedDate && booking.roomNumber === room.number;
+            });
+            
+            if(!foundBooking) return room;
+        });
+
+        selectDatePanel.classList.add('slide-out');
+        setTimeout(() => {
+            selectDatePanel.classList.add('hidden')
+            selectDatePanel.classList.remove('slide-out');
+            selectRoomTypePanel.classList.remove('hidden');
+            selectRoomTypePanel.classList.add('slide-in');
+        }, 500);
+    }
 }
 
 const confirmRoomType = () => {
     selectedRoomType = roomSelect.value;
+    currentPanel = 'roomsAvailablePanel';
     const roomsFilteredByDateAndType = roomsFilteredByDate.filter(room => room.roomType === selectedRoomType);
 
     selectRoomTypePanel.classList.remove('slide-in');
@@ -121,16 +146,23 @@ const confirmRoomType = () => {
 
 const getRoomsAvailable = (rooms) => {
     roomsAvailable.innerHTML = '';
-    rooms.forEach(room => {
-        roomsAvailable.innerHTML += `
-            <div tabindex=1 class=room-card id=${room.number}>
-                <span>${room.numBeds} ${room.bedSize} bed(s)</span> <span>$${room.costPerNight}</span>
-            </div>
-        `;
-    });
+    if (!rooms.length) {
+        roomsAvailable.innerHTML = `
+            <p>We're supremely sorry, but no rooms of this type are available on the day you requested. Please try again for an alternate day and/or room type.</p>
+        `
+    } else {
+        rooms.forEach(room => {
+            roomsAvailable.innerHTML += `
+                <div tabindex=1 class=room-card id=${room.number}>
+                    <span>${room.numBeds} ${room.bedSize} bed(s)</span> <span>$${room.costPerNight}</span>
+                </div>
+            `;
+        });
+    }
 }
 
 const getRoomDetails = (roomNumber) => {
+    currentPanel = 'confirmBookingPanel';
     roomsAvailablePanel.classList.remove('slide-in');
     roomsAvailablePanel.classList.add('slide-out');
     setTimeout(() => {
@@ -151,6 +183,7 @@ const getRoomDetails = (roomNumber) => {
 }
 
 const confirmBooking = () => {
+    currentPanel = 'bookingConfirmationPanel';
     confirmBookingPanel.classList.remove('slide-in');
     confirmBookingPanel.classList.add('slide-out');
     setTimeout(() => {
@@ -165,6 +198,7 @@ const confirmBooking = () => {
 
     setTimeout(() => {
         confirmationDetails.innerHTML = `
+            <p>Prepare for your stay on ${selectedDate}!</p>
             <p>Confirmation No. ${pageData.latestBookingID}</p>
             <p>Room No. ${selectedRoom.number}</p>
             <p>${selectedRoom.roomType}</p>
@@ -185,4 +219,4 @@ const returnToDash = () => {
     newBooking.classList.remove('fade-in');
 }
 
-export { renderDashboard, loginUser, toggleView, bookNow, confirmDate, confirmRoomType, getRoomDetails, confirmBooking, returnToDash };
+export { renderDashboard, loginUser, toggleView, bookNow, goToPreviousPanel, exitPanel, confirmDate, confirmRoomType, getRoomDetails, confirmBooking, returnToDash };
