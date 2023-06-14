@@ -1,8 +1,8 @@
-import { bookings, root, leadingZero, upcomingBookings, previousBookings, newBooking, selectRoomTypePanel, roomSelect, roomsAvailablePanel, roomsAvailable, date, roomDetails, confirmBookingPanel } from "./scripts";
+import { userInput, passInput, main, userActions, bookings, root, leadingZero, upcomingBookings, previousBookings, newBooking, selectRoomTypePanel, roomSelect, roomsAvailablePanel, roomsAvailable, date, roomDetails, confirmBookingPanel } from "./scripts";
 import { toggleBtns } from "./helperFunctions";
-import { getTotalSpent } from "./user";
+import { userLookup, getTotalSpent } from "./user";
 import { getBookingsByView } from "./bookings";
-import { pageData, loadData, addBooking } from "./apiCalls";
+import { pageData, getUser, loadData, addBooking } from "./apiCalls";
 
 let currentView = 'upcoming';
 let selectedDate;
@@ -51,6 +51,19 @@ const renderDashboard = (pageData) => {
                 <span>${thisRoom.costPerNight}</span>
             </div>`
         });
+    }
+}
+
+const loginUser = () => {
+    const userID = userLookup(userInput.value);
+    if (userID && passInput.value === 'overlook2021') {
+        login.classList.add('hidden');
+        getUser(userID);
+        loadData();
+        main.classList.remove('hidden');
+        userActions.classList.remove('hidden');
+    } else {
+        console.log("Incorrect username or password, try again")
     }
 }
 
@@ -172,4 +185,4 @@ const returnToDash = () => {
     newBooking.classList.remove('fade-in');
 }
 
-export { renderDashboard, toggleView, bookNow, confirmDate, confirmRoomType, getRoomDetails, confirmBooking, returnToDash };
+export { renderDashboard, loginUser, toggleView, bookNow, confirmDate, confirmRoomType, getRoomDetails, confirmBooking, returnToDash };

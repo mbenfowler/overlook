@@ -25,25 +25,31 @@ describe('userLookup', () => {
 
   const invalidUsername1 = 'soinvald10';
   const userID2 = userLookup(invalidUsername1);
-  it.skip('should not find invalid username', () => {
+  it('should not find invalid username', () => {
     expect(userID2).to.equal(undefined);
   });
 
   const invalidUserID1 = 'customer51';
   const userID3 = userLookup(invalidUserID1);
-  it.skip('should not find invalid user id over 50', () => {
+  it('should not find invalid user id over 50', () => {
     expect(userID3).to.equal(undefined);
   });
 
   const invalidUserID2 = 'customer-1';
   const userID4 = userLookup(invalidUserID2);
-  it.skip('should not find invalid user id less than zero', () => {
+  it('should not find invalid user id less than zero', () => {
     expect(userID4).to.equal(undefined);
   });
 
   const invalidUserID3 = 'customer0';
   const userID5 = userLookup(invalidUserID3);
-  it.skip('should not find invalid user id of zero', () => {
+  it('should not find invalid user id of zero', () => {
     expect(userID5).to.equal(undefined);
+  });
+
+  const invalidUserID4 = 'customeraaa';
+  const userID6 = userLookup(invalidUserID4);
+  it('should not find invalid user id of non-number characters', () => {
+    expect(userID6).to.equal(undefined);
   });
 });

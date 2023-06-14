@@ -6,8 +6,9 @@
 // }
 
 const userLookup = (username) => {
-    if (username.startsWith('customer')) {
-        return Number(username.slice(8));
+    const slicedUsername = Number(username.slice(8))
+    if (username.startsWith('customer') && slicedUsername <= 50 && slicedUsername > 0) {
+        return slicedUsername;
     }
 }
 

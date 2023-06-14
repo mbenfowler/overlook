@@ -1,7 +1,7 @@
 // An example of how you tell webpack to use a CSS (SCSS) file
 import './css/styles.css';
 import { loadData } from './apiCalls';
-import { toggleView, bookNow, confirmDate, confirmRoomType, getRoomDetails, confirmBooking, returnToDash } from './domUpdates';
+import { loginUser, toggleView, bookNow, confirmDate, confirmRoomType, getRoomDetails, confirmBooking, returnToDash } from './domUpdates';
 import { userLookup } from './user';
 
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
@@ -17,6 +17,7 @@ const login = document.querySelector('#login');
 const userInput = document.querySelector('#username');
 const passInput = document.querySelector('#pass');
 const submitLogin = document.querySelector('#submit');
+const userActions = document.querySelector('#userActions');
 const main = document.querySelector('main');
 const bookings = document.querySelector('#bookings');
 const root = document.querySelector(':root');
@@ -42,14 +43,7 @@ const returnToDashBtn = document.querySelector('#returnToDash');
 // window.addEventListener('load', loadData);
 
 submitLogin.addEventListener('click', () => {
-    const userID = userLookup(userInput.value);
-    if (user && passInput.value === 'overlook2021') {
-        login.classList.add('hidden');
-        loadData(userID);
-        main.classList.remove('hidden');
-    } else {
-        // Incorrect username or password, try again
-    }
+    loginUser();
 });
 
 bookingsToggle.addEventListener('click', (e) => {
@@ -116,4 +110,4 @@ returnToDashBtn.addEventListener('keyup', (e) => {
     }
 });
 
-export { userInput, passInput, bookings, root, leadingZero, upcomingBookings, previousBookings, newBooking, selectRoomTypePanel, roomSelect, roomsAvailablePanel, roomsAvailable, date, confirmBookingPanel, roomDetails };
+export { userInput, passInput, main, userActions, bookings, root, leadingZero, upcomingBookings, previousBookings, newBooking, selectRoomTypePanel, roomSelect, roomsAvailablePanel, roomsAvailable, date, confirmBookingPanel, roomDetails };
