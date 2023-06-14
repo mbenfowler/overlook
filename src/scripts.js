@@ -1,6 +1,6 @@
 // An example of how you tell webpack to use a CSS (SCSS) file
 import './css/styles.css';
-import { loginUser, toggleView, bookNow, confirmDate, confirmRoomType, getRoomDetails, confirmBooking, returnToDash } from './domUpdates';
+import { loginUser, toggleView, bookNow, goToPreviousPanel, exitPanel, confirmDate, confirmRoomType, getRoomDetails, confirmBooking, returnToDash } from './domUpdates';
 
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
 import './images/turing-logo.png';
@@ -11,7 +11,6 @@ import './images/overlook-background.png';
 
 
 // query selectors
-const login = document.querySelector('#login');
 const userInput = document.querySelector('#username');
 const passInput = document.querySelector('#pass');
 const submitLogin = document.querySelector('#submit');
@@ -25,6 +24,8 @@ const upcomingBookings = document.querySelector("#upcoming");
 const previousBookings = document.querySelector("#previous");
 const bookNowBtn = document.querySelector("#bookNowBtn");
 const newBooking = document.querySelector("#newBooking");
+const backBtn = document.querySelector("#backBtn");
+const exitBtn = document.querySelector("#exitBtn");
 const date = document.querySelector("#bookingDate");
 const confirmDateBtn = document.querySelector("#confirmDate");
 const selectRoomTypePanel = document.querySelector("#selectRoomTypePanel");
@@ -38,11 +39,8 @@ const confirmBookingBtn = document.querySelector('#confirmBookingBtn');
 const returnToDashBtn = document.querySelector('#returnToDash');
 
 // event listeners
-// window.addEventListener('load', loadData);
 
-submitLogin.addEventListener('click', () => {
-    loginUser();
-});
+submitLogin.addEventListener('click', loginUser);
 
 bookingsToggle.addEventListener('click', (e) => {
     if (e.target.classList.contains("unselected-view")) {
@@ -64,8 +62,24 @@ bookNowBtn.addEventListener('keyup', (e) => {
     }
 });
 
+backBtn.addEventListener('click', goToPreviousPanel);
+
+backBtn.addEventListener('keyup', (e) => {
+    if (e.key === 'Enter') {
+        goToPreviousPanel();
+    }
+});
+
+exitBtn.addEventListener('click', exitPanel);
+
+exitBtn.addEventListener('keyup', (e) => {
+    if (e.key === 'Enter') {
+        exitPanel();
+    }
+});
+
 confirmDateBtn.addEventListener('click', () => {
-    confirmDate(date)
+    confirmDate(date);
 });
 
 confirmDateBtn.addEventListener('keyup', (e) => {
