@@ -1,4 +1,4 @@
-import { getRandomIndex } from "./helperFunctions";
+// import { getRandomIndex } from "./helperFunctions";
 
 // const getRandomUser = users => {
 //     return users[0];
@@ -6,7 +6,9 @@ import { getRandomIndex } from "./helperFunctions";
 // }
 
 const userLookup = (username) => {
-
+    if (username.startsWith('customer')) {
+        return Number(username.slice(8));
+    }
 }
 
 const getTotalSpent = (bookings, rooms) => {
