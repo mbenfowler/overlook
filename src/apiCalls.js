@@ -1,4 +1,3 @@
-import { getRandomUser } from './user';
 import { renderDashboard } from './domUpdates';
 
 let pageData = {
@@ -8,22 +7,25 @@ let pageData = {
   allBookings: []
 };
 
-const getAllUsers = () => fetch('http://localhost:3001/api/v1/customers');
+const getUser = (userID) => {
+  fetch(`http://localhost:3001/api/v1/customers/${userID}`)
+    .then(response => response.json())
+    .then(user => pageData.currentUser = user)
+    .catch(err => console.error(err));
+}
 const getAllBookings = () => fetch('http://localhost:3001/api/v1/bookings');
 const getAllRooms = () => fetch('http://localhost:3001/api/v1/rooms');
-
-const handleUserData = users => pageData.currentUser = getRandomUser(users);
 
 const handleBookingsData = bookings => {
   pageData.allBookings = bookings;
   setTimeout(() => {
     pageData.currentUserBookings = bookings.filter(booking => booking.userID === pageData.currentUser.id);
     renderDashboard(pageData);
-  }, 10);
+  }, 500);
 }
 
 const loadData = () => {
-    Promise.all([getAllUsers(), getAllBookings(), getAllRooms()])
+    Promise.all([getAllBookings(), getAllRooms()])
     .then (responses => {
       responses.forEach(response => {
         if(response.ok) {
@@ -31,7 +33,6 @@ const loadData = () => {
           .then (data => {
             const functions = {
               rooms: (rooms) => pageData.allRooms = rooms,
-              customers: (users) => handleUserData(users), 
               bookings: (bookings) => handleBookingsData(bookings)
             };
             const property = response.url.split('/').reverse()[0];
@@ -67,4 +68,4 @@ const addBooking = (date, roomNumber) => {
     .catch(error => console.error(error));
 }
 
-export { loadData, pageData, addBooking };
+export { getUser, loadData, pageData, addBooking };

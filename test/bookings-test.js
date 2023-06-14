@@ -12,7 +12,7 @@ describe('getBookingsByView', () => {
 
     const today = new Date();
     today.setDate(today.getDate() + 1);
-    const todaysUpcomingBooking = getBookingsByView([{date: today.toLocaleDateString("en-CA")}], 'upcoming');
+    const todaysUpcomingBooking = getBookingsByView([{date: today.toLocaleDateString("en-CA").replaceAll('-', '/')}], 'upcoming');
     it('should correctly add todays bookings to upcoming dates', () => {
         expect(todaysUpcomingBooking.length).to.equal(1);
     });
@@ -22,7 +22,7 @@ describe('getBookingsByView', () => {
       expect(previousBookings.length).to.equal(4);
     });
 
-    const todaysPreviousBooking = getBookingsByView([{date: today.toLocaleDateString("en-CA")}], 'previous');
+    const todaysPreviousBooking = getBookingsByView([{date: today.toLocaleDateString("en-CA").replaceAll('-', '/')}], 'previous');
     it('should not add todays bookings to previous dates', () => {
         expect(todaysPreviousBooking.length).to.equal(0);
     });

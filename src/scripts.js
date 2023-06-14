@@ -1,16 +1,22 @@
 // An example of how you tell webpack to use a CSS (SCSS) file
 import './css/styles.css';
-import { loadData } from './apiCalls';
-import { toggleView, bookNow, confirmDate, confirmRoomType, getRoomDetails, confirmBooking, returnToDash } from './domUpdates';
+import { loginUser, toggleView, bookNow, confirmDate, confirmRoomType, getRoomDetails, confirmBooking, returnToDash } from './domUpdates';
 
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
 import './images/turing-logo.png';
 import './images/user.png';
 import './images/delete.png';
 import './images/back.png';
+import './images/overlook-background.png';
 
 
 // query selectors
+const login = document.querySelector('#login');
+const userInput = document.querySelector('#username');
+const passInput = document.querySelector('#pass');
+const submitLogin = document.querySelector('#submit');
+const userActions = document.querySelector('#userActions');
+const main = document.querySelector('main');
 const bookings = document.querySelector('#bookings');
 const root = document.querySelector(':root');
 const leadingZero = document.querySelector('#leadingZero');
@@ -32,7 +38,11 @@ const confirmBookingBtn = document.querySelector('#confirmBookingBtn');
 const returnToDashBtn = document.querySelector('#returnToDash');
 
 // event listeners
-window.addEventListener('load', loadData);
+// window.addEventListener('load', loadData);
+
+submitLogin.addEventListener('click', () => {
+    loginUser();
+});
 
 bookingsToggle.addEventListener('click', (e) => {
     if (e.target.classList.contains("unselected-view")) {
@@ -98,4 +108,4 @@ returnToDashBtn.addEventListener('keyup', (e) => {
     }
 });
 
-export { bookings, root, leadingZero, upcomingBookings, previousBookings, newBooking, selectRoomTypePanel, roomSelect, roomsAvailablePanel, roomsAvailable, date, confirmBookingPanel, roomDetails };
+export { userInput, passInput, main, userActions, bookings, root, leadingZero, upcomingBookings, previousBookings, newBooking, selectRoomTypePanel, roomSelect, roomsAvailablePanel, roomsAvailable, date, confirmBookingPanel, roomDetails };
