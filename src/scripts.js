@@ -40,7 +40,9 @@ const returnToDashBtn = document.querySelector('#returnToDash');
 
 // event listeners
 
-submitLogin.addEventListener('click', loginUser);
+window.addEventListener('load', loginUser);
+
+// submitLogin.addEventListener('click', loginUser);
 
 bookingsToggle.addEventListener('click', (e) => {
     if (e.target.classList.contains("unselected-view")) {
