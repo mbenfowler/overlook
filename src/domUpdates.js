@@ -82,11 +82,10 @@ const bookNow = () => {
     newBooking.classList.remove('hidden');
     newBooking.classList.add('fade-in');
     selectDatePanel.classList.remove('hidden');
-    date.valueAsDate = new Date();
 }
 
 const confirmDate = (date) => {
-    if ( date.valueAsDate < new Date().setDate(new Date().getDate() - 1)) {
+    if (date.valueAsDate < new Date().setDate(new Date().getDate() - 1)) {
         alert("What are you Marty McFly? Please pick a future date.")
     } else {
         selectedDate = date.value.replaceAll('-', '/');
