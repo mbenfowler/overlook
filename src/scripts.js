@@ -38,11 +38,11 @@ const confirmBookingBtn = document.querySelector('#confirmBookingBtn');
 const returnToDashBtn = document.querySelector('#returnToDash');
 
 // event listeners
-// window.addEventListener('load', loadData);
+window.addEventListener('load', loginUser);
 
-submitLogin.addEventListener('click', () => {
-    loginUser();
-});
+// submitLogin.addEventListener('click', () => {
+//     loginUser();
+// });
 
 bookingsToggle.addEventListener('click', (e) => {
     if (e.target.classList.contains("unselected-view")) {

@@ -55,13 +55,13 @@ const renderDashboard = (pageData) => {
 }
 
 const loginUser = () => {
-    const userID = userLookup(userInput.value);
-    if (userID && passInput.value === 'overlook2021') {
-        login.classList.add('hidden');
+    const userID = 50;//userLookup(userInput.value);
+    if (userID) {// && passInput.value === 'overlook2021') {
+        // login.classList.add('hidden');
         getUser(userID);
         loadData();
-        main.classList.remove('hidden');
-        userActions.classList.remove('hidden');
+        // main.classList.remove('hidden');
+        // userActions.classList.remove('hidden');
     } else {
         console.log("Incorrect username or password, try again")
     }
