@@ -87,8 +87,6 @@ const bookNow = () => {
 }
 
 const goToPreviousPanel = () => {
-    console.log("going to previous panel")
-    console.log(document.querySelector(`#${currentPanel}`))
     if (currentPanel === 'selectDatePanel') {
         exitPanel();
     } else {
@@ -99,13 +97,10 @@ const goToPreviousPanel = () => {
 const exitPanel = () => {
     if (currentPanel !== 'selectDatePanel') {
         const thisPanel = document.querySelector(`#${currentPanel}`);
-        const prevPanel = thisPanel.previousElementSibling;
-        console.log(prevPanel);
-        prevPanel.classList.add('hidden')
-        prevPanel.classList.remove('slide-out');
         thisPanel.classList.add('hidden');
         thisPanel.classList.remove('slide-in');
     }
+    
     returnToDash();
 }
 
