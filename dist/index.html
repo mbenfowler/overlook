@@ -36,7 +36,7 @@
         <section class="panel hidden" id="selectDatePanel">
           <div id="datePicker">
             <label for="bookingDate">What date are you looking to book?</label>
-            <input type="date" id="bookingDate" name="trip-start" onfocus="this.value=new Date().toISOString().split('T')[0], this.min=new Date().toISOString().split('T')[0]">
+            <input type="date" id="bookingDate" name="trip-start" onfocus="this.min=new Date().toISOString().split('T')[0]">
             <button class="action-btn" id="confirmDate"><span>Next </span></button>
           </div>
         </section>
