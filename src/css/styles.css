@@ -285,7 +285,7 @@ div {
 
 #bookingContainer > div {
   width: 100%;
-  justify-content: space-between;
+  justify-content: flex-end;
 }
 
 .nav-btn {

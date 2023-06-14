@@ -5,6 +5,7 @@ import { getBookingsByView } from "./bookings";
 import { pageData, getUser, loadData, addBooking } from "./apiCalls";
 
 let currentView = 'upcoming';
+let currentPanel;
 let selectedDate;
 let roomsFilteredByDate;
 let selectedRoomType;
@@ -76,6 +77,7 @@ const toggleView = (clickedViewID) => {
 }
 
 const bookNow = () => {
+    currentPanel = 'selectDatePanel';
     nav.classList.add('blur', 'no-click');
     costAndToggle.classList.add('blur', 'no-click');
     bookings.classList.add('blur', 'no-click');
@@ -84,10 +86,29 @@ const bookNow = () => {
     selectDatePanel.classList.remove('hidden');
 }
 
+const goToPreviousPanel = () => {
+    if (currentPanel === 'selectDatePanel') {
+        exitPanel();
+    } else {
+        
+    }
+}
+
+const exitPanel = () => {
+    if (currentPanel !== 'selectDatePanel') {
+        const thisPanel = document.querySelector(`#${currentPanel}`);
+        thisPanel.classList.add('hidden');
+        thisPanel.classList.remove('slide-in');
+    }
+    
+    returnToDash();
+}
+
 const confirmDate = (date) => {
     if (date.valueAsDate < new Date().setDate(new Date().getDate() - 1)) {
         alert("What are you Marty McFly? Please pick a future date.")
     } else {
+        currentPanel = 'selectRoomTypePanel';
         selectedDate = date.value.replaceAll('-', '/');
         roomsFilteredByDate = pageData.allRooms.filter(room => {
             const foundBooking = pageData.allBookings.find(booking => {
@@ -109,6 +130,7 @@ const confirmDate = (date) => {
 
 const confirmRoomType = () => {
     selectedRoomType = roomSelect.value;
+    currentPanel = 'roomsAvailablePanel';
     const roomsFilteredByDateAndType = roomsFilteredByDate.filter(room => room.roomType === selectedRoomType);
 
     selectRoomTypePanel.classList.remove('slide-in');
@@ -140,6 +162,7 @@ const getRoomsAvailable = (rooms) => {
 }
 
 const getRoomDetails = (roomNumber) => {
+    currentPanel = 'confirmBookingPanel';
     roomsAvailablePanel.classList.remove('slide-in');
     roomsAvailablePanel.classList.add('slide-out');
     setTimeout(() => {
@@ -160,6 +183,7 @@ const getRoomDetails = (roomNumber) => {
 }
 
 const confirmBooking = () => {
+    currentPanel = 'bookingConfirmationPanel';
     confirmBookingPanel.classList.remove('slide-in');
     confirmBookingPanel.classList.add('slide-out');
     setTimeout(() => {
@@ -194,4 +218,4 @@ const returnToDash = () => {
     newBooking.classList.remove('fade-in');
 }
 
-export { renderDashboard, loginUser, toggleView, bookNow, confirmDate, confirmRoomType, getRoomDetails, confirmBooking, returnToDash };
+export { renderDashboard, loginUser, toggleView, bookNow, goToPreviousPanel, exitPanel, confirmDate, confirmRoomType, getRoomDetails, confirmBooking, returnToDash };
