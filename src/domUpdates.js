@@ -198,6 +198,7 @@ const confirmBooking = () => {
 
     setTimeout(() => {
         confirmationDetails.innerHTML = `
+            <p>Prepare for your stay on ${selectedDate}!</p>
             <p>Confirmation No. ${pageData.latestBookingID}</p>
             <p>Room No. ${selectedRoom.number}</p>
             <p>${selectedRoom.roomType}</p>
