@@ -5,9 +5,8 @@
   "main": "src/index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mbenfowler/overlook.git"
+    "url": "git+https://github.com/turingschool-examples/webpack-starter-kit.git"
   },
-  "homepage": "http://mbenfowler.github.io/overlook",
   "author": "Turing School of Software and Design",
   "license": "MIT",
   "devDependencies": {
@@ -15,7 +14,6 @@
     "css-loader": "^5.2.6",
     "eslint": "^7.27.0",
     "file-loader": "^6.2.0",
-    "gh-pages": "^6.0.0",
     "mocha": "^8.4.0",
     "mochapack": "^2.1.2",
     "sass": "^1.34.0",
@@ -29,8 +27,6 @@
     "start": "webpack serve",
     "build": "webpack",
     "test": "mochapack 'test/**/*.js'",
-    "lint": "./node_modules/.bin/eslint 'src/**.js' 'test/**.js'",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "lint": "./node_modules/.bin/eslint 'src/**.js' 'test/**.js'"
   }
 }
