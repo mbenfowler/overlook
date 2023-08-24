@@ -8,13 +8,13 @@ let pageData = {
 };
 
 const getUser = (userID) => {
-  fetch(`https://overlook-api-heroku.herokuapp.com/api/v1/customers/${userID}`)
+  fetch(`https://overlook-api-zeta.vercel.app/api/v1/customers/${userID}`)
     .then(response => response.json())
     .then(user => pageData.currentUser = user)
     .catch(err => console.error(err));
 }
-const getAllBookings = () => fetch('https://overlook-api-heroku.herokuapp.com/api/v1/bookings');
-const getAllRooms = () => fetch('https://overlook-api-heroku.herokuapp.com/api/v1/rooms');
+const getAllBookings = () => fetch('https://overlook-api-zeta.vercel.app/api/v1/bookings');
+const getAllRooms = () => fetch('https://overlook-api-zeta.vercel.app/api/v1/rooms');
 
 const handleBookingsData = bookings => {
   pageData.allBookings = bookings;
@@ -60,7 +60,7 @@ const addBooking = (date, roomNumber) => {
     "roomNumber": roomNumber
   });
   
-  fetch('https://overlook-api-heroku.herokuapp.com/api/v1/bookings', requestOptions)
+  fetch('https://overlook-api-zeta.vercel.app/api/v1/bookings', requestOptions)
     .then(response => response.json())
     .then(data => {
       pageData.latestBookingID = data.newBooking.id;
